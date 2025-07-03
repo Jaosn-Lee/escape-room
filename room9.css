@@ -1,0 +1,174 @@
+@font-face {
+    font-family: spartan;
+    src: url(fonts/League_Spartan.ttf);
+}
+body{
+    background-color: rgb(183, 206, 130);
+    font-family: spartan, Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column; /* Keep as column to center everything */
+    align-items: center;
+    padding: 0 10px;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container{
+    width: 850px;
+    background: white;
+    display: flex;
+    gap: 70px;
+    align-items: flex-end;
+    padding: 60px 40px;
+    border-radius: 20px;
+    /* Removed margin-bottom as the button is now in the modal */
+}
+.hangman-box img{
+    max-width: 270px;
+}
+
+.hangman-box h1{
+    font-size: 1.45rem; 
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.word-display{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+.word-display .letter{
+    width: 28px;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid black;
+}
+.word-display .letter.guessed {
+    border-color: transparent;
+    margin: -40px 0 35px;
+}
+.game-box h4{
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.game-box h4 b{
+    font-weight: 600;
+}
+.game-box .guesses-text b {
+    color:red;
+
+}
+.game-box .keyboard {
+    display: flex;
+    gap: 5px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* Re-check these button styles to ensure they apply to both */
+:where(.game-modal .content button, .keyboard button) { /* Adjusted selector */
+    color:white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    background: rgb(183, 206, 130);
+    border-radius: 8px;
+}
+.keyboard button {
+    padding: 7px;
+    width: calc(100% / 9 - 5px);
+}
+.keyboard button[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+:where(.game-modal .content button, .keyboard button):hover{ /* Adjusted selector */
+    background: rgb(136, 152, 99);
+}
+.game-modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    opacity: 0;
+    padding: 0 10px;
+    pointer-events: none;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.6);
+    transition: opacity 0.3s ease;
+}
+.game-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.game-modal .content {
+    background: white;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex; /* NEW: Use flexbox for content to arrange buttons */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+}
+.game-modal img{
+    max-width: 130px;
+    margin-bottom: 20px;
+}
+.game-modal h4 {
+    font-size: 1.53rem;
+}
+.game-modal p{
+    font-size: 1.15rem;
+    margin: 15px 0 30px;
+    font-weight: 500;
+}
+.game-modal p b {
+    color: rgb(183, 206, 130);
+    font-weight: 600;
+}
+.game-modal button { /* Specific styles for buttons inside the modal */
+    padding: 12px 23px;
+    margin-top: 10px; /* Space between buttons */
+    width: 80%; /* Make buttons take up more width */
+    max-width: 250px; /* Limit their max width */
+}
+
+/* Specific styling for the win button */
+.game-modal .next-page-btn { /* Use a class for this */
+    background-color: #4CAF50; /* Green */
+}
+.game-modal .next-page-btn:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+@media (max-width:782px) {
+    .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        align-items: center;
+    }
+    .hangman-box img {
+        max-width: 200px;
+    }
+    .hangman-box h1 {
+        display: none;
+    }
+}

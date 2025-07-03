@@ -1,0 +1,275 @@
+@font-face {
+    font-family: spartan;
+    src: url(fonts/League_Spartan.ttf);
+}
+.tiny{
+    font-size: 0.2em;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+.emoji_face{
+    position:relative;
+    width:300px;
+    height:300px;
+    background: rgba(255,255,0,.63);
+    border-radius: 50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+.emoji_face::before{
+    content: "";
+    top: 180px;
+    position:absolute;
+    width:150px;
+    height:70px;
+    background-color: crimson;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    transition: 0.5s;
+}
+#room2_body{
+    box-sizing: border-box;
+    display:flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(183, 206, 130);
+}
+.eyes{
+    position:relative;
+    top: -40px;
+    display: flex;
+}
+.eyes .eye{
+    position:relative;
+    width:80px;
+    height:80px;
+    display:block; 
+    background-color: white;
+    border-radius:50%;
+    margin: 0 15px;
+}
+.eyes .eye::before{
+    content: "";
+    position:absolute;
+    top:50%;
+    left: 25px;
+    transform: translate(-50%, -50%);
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    background-color: black;
+}
+h1{
+    font-family: spartan, Arial, Helvetica, sans-serif;
+}
+h2{
+    font-family:spartan, Arial, Helvetica, sans-serif;
+}
+p{
+    font-family: spartan, Arial, Helvetica, sans-serif;
+}
+#big_button{
+    position: fixed;
+    border:none;
+    border-radius: 40px;
+    height:500px;
+    width:1000px;
+    font-family: spartan, Arial, Helvetica, sans-serif;
+    font-size: 10em;
+    background-color:burlywood;
+    left: -20px;
+    top: -2px;
+}
+#big_button:hover{
+    cursor: pointer;
+    background-color: rgb(165, 133, 91);
+}
+.clickme{
+    font-family: spartan, Arial, Helvetica, sans-serif;
+    width: 100px;
+    height: 50px;
+    border: 4px solid black;
+    background-color: brown;
+    border-radius: 10px;
+}
+.clickme:hover{
+    background-color: rgb(144, 78, 78);
+    cursor: pointer;
+}
+.green{
+    background-color: rgb(183, 206, 130);
+}
+#rps_body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Changed to column to stack elements */
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    padding:2rem 7rem;
+    border-radius: 14px;
+    background:white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+.result_images{
+    display: flex;
+    column-gap: 7rem;
+}
+.container.start .user_result{
+    transform-origin: left;
+    animation: userShake 1s ease infinite;
+}
+@keyframes userShake {
+    50%{
+        transform: rotate(10deg);
+    }   
+}
+.container.start .cpu_result{
+    transform-origin: right;
+    animation: cpuShake 1s ease infinite;
+}
+@keyframes cpuShake {
+    50%{
+        transform: rotate(-10deg);
+    }   
+}
+.result_images img{
+    width: 100px;
+}
+.user_result{
+    transform: rotate(90deg);
+}
+.cpu_result{
+    transform: rotate(-90deg) rotateY(180deg);
+}
+.result{
+    font-family: spartan;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+}
+.option_images{
+    display:flex;
+    align-items: center;
+    margin-top:2.5rem;
+    justify-content: space-between;
+}
+.container.start .option_images{
+    pointer-events: none;
+}
+.option_image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.5;
+    transition:  opacity 0.3s ease;
+}
+.option_image:hover{
+    opacity: 1;
+}
+.option_image.active{
+    opacity: 1;
+}
+.option_image img{
+    width:50px;
+    pointer-events: none;
+}
+.option_image p{
+    margin-top: 1rem;
+}
+
+/* Styles for the next page button */
+#next-page-button-container {
+    margin-top: 20px; /* Add some space above the button */
+    display: none; /* Hidden by default */
+}
+
+#next-page-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-family: spartan;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next-page-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+#center_body{
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+#center_body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Changed to column to stack h1, canvas, and buttons */
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* Remove default body margin */
+}
+
+/* Add some margin to the canvas for spacing */
+#board {
+    margin-bottom: 20px;
+}
+
+/* Styles for the next page button container */
+#next-page-button-container {
+    margin-top: 20px; /* Space above the button */
+    display: none; /* Hidden by default */
+}
+
+#next-page-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif; /* Using a common font */
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next-page-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* NEW: Styles for the restart button container */
+#restart-button-container {
+    margin-top: 20px; /* Space above the button */
+    display: none; /* Hidden by default */
+}
+
+#restart-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    background-color: #f44336; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart-button:hover {
+    background-color: #da190b; /* Darker red on hover */
+}
+
+/* Your existing CSS for the game board */
+/* (Assuming you have styles for .green or other elements if needed) */

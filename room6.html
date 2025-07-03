@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shadow Alignment</title>
+    <link rel="icon" href="images/shadow.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #f0f0f0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .text-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+        }
+
+        .floating-text {
+            position: absolute;
+            font-size: 48px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: #333;
+            user-select: none;
+        }
+
+        #text1 { top: 80px; left: 100px; }
+        #text2 { top: 180px; left: 250px; }
+        #text3 { top: 280px; left: 150px; }
+
+        .shadow {
+            position: absolute;
+            font-size: 48px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.2);
+            transition: all 0.05s ease;
+            pointer-events: none;
+        }
+
+        .hidden-button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            font-size: 18px;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #666;
+            opacity: 0.7;
+        }
+
+        .solution-point {
+            position: absolute;
+            left: 300px;
+            top: 200px;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="green">
+    <div class="cursor"></div>
+    
+    <div class="text-container">
+        <div class="solution-point"></div>
+        <div class="floating-text" id="text1">ALIGN</div>
+        <div class="floating-text" id="text2">THE</div>
+        <div class="floating-text" id="text3">SHADOWS</div>
+            <button class="hidden-button" onclick="window.location.href='room7.html'">room 7</button>
+    </div>
+
+    <script>
+        const cursor = document.querySelector('.cursor');
+        const texts = document.querySelectorAll('.floating-text');
+        const hiddenButton = document.querySelector('.hidden-button');
+        const container = document.querySelector('.text-container');
+        const solutionPoint = document.querySelector('.solution-point');
+        
+        // Create shadows for each text
+        texts.forEach(text => {
+            const shadow = text.cloneNode(true);
+            shadow.classList.add('shadow');
+            shadow.classList.remove('floating-text');
+            text.parentNode.appendChild(shadow);
+        });
+
+        const shadows = document.querySelectorAll('.shadow');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            
+            // Get solution point position
+            const containerRect = container.getBoundingClientRect();
+            const solutionRect = solutionPoint.getBoundingClientRect();
+            const solutionX = solutionRect.left + solutionRect.width / 2;
+            const solutionY = solutionRect.top + solutionRect.height / 2;
+
+            // Calculate shadow positions relative to solution point
+            shadows.forEach((shadow, index) => {
+                const text = texts[index];
+                const rect = text.getBoundingClientRect();
+                const textCenterX = rect.left + rect.width / 2;
+                const textCenterY = rect.top + rect.height / 2;
+
+                // Calculate offset from cursor to solution point
+                const offsetX = (e.clientX - solutionX) / 15;
+                const offsetY = (e.clientY - solutionY) / 15;
+
+                // Move shadows towards solution point when cursor is near it
+                shadow.style.transform = `translate(
+                    ${offsetX}px,
+                    ${offsetY}px
+                )`;
+            });
+            
+            // Check if cursor is near solution point
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - solutionX, 2) + 
+                Math.pow(e.clientY - solutionY, 2)
+            );
+            
+            if (distance < 30) {
+                hiddenButton.style.opacity = '1';
+                hiddenButton.style.pointerEvents = 'all';
+            } else {
+                hiddenButton.style.opacity = '0';
+                hiddenButton.style.pointerEvents = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
